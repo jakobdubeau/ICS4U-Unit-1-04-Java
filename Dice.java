@@ -17,7 +17,9 @@ import java.util.Scanner;
 */
 final class Dice {
 
- public static final int MAX = 7;
+public static final int MAX = 6;
+public static final int MIN = 1;
+public static final int NUM = 100;
 
     /**
     * Prevents instantiation.
@@ -44,25 +46,23 @@ final class Dice {
         final int cMove = numbers[new Random().nextInt(numbers.length)];
 
         final Scanner scanner = new Scanner(System.in);
-        final int  pMove;
-
+        int  pMove;
+try {
         System.out.println("Pick a number between 1-6: ");
         pMove = scanner.nextInt();
-        int numberOfTries = 0;
-try {
+        int numberOfTries = 1;
 int counter = 1;
-while (counter > MAX) {
+while (counter > NUM) {
 counter = counter + 1;
 }
 
-    while () {
+    do {
             
-    numberOfTries = numberOfTries + 1;
+   numberOfTries = numberOfTries + 1;
     
-    if (pMove == cMove) {
-    System.out.println("You won!");
-break;
-} 
+    if (pMove > MAX || pMove < MIN) {
+    System.out.println("Guess won't count.");
+}
     else if (pMove < cMove) {
     System.out.println("Too low!");
 }
@@ -70,10 +70,18 @@ break;
     System.out.println("Too high!");
 }
     else {
-    System.out.println("That was not a valid number.");
-break;
+    System.out.println("You Guessed Correctly! It took you 1 try.");
+System.out.println("\nDone.");
+System.exit(0);
 }
+
+System.out.println("Keep guessing");
+pMove = scanner.nextInt();
 }
+while (pMove != cMove);
+
+            System.out.println("You Guessed Correctly! It took you "
+ + numberOfTries + " tries.");
 }
 catch (java.util.InputMismatchException errorCode) {
             // Invalid Input.
